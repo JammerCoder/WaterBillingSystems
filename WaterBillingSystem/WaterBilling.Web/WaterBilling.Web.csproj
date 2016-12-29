@@ -217,6 +217,16 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WaterBilling.Data\WaterBilling.Data.csproj">
+      <Project>{63df3eaf-c831-4cd6-a9fb-a94c945a67a4}</Project>
+      <Name>WaterBilling.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WaterBilling.Model\WaterBilling.Model.csproj">
+      <Project>{e9a68182-582a-41b1-ab90-995a344a8d41}</Project>
+      <Name>WaterBilling.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
