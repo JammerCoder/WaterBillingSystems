@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace WaterBilling.Model
 {
-    public class Member
+    
+    public partial class Member : IEntity
     {
-        public int Id { get; set; }
+        public new int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
