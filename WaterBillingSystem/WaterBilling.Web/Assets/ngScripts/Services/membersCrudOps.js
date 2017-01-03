@@ -31,7 +31,7 @@
         return $http.get(urlGet);
     }
 
-    this.getbyId = function (apiRoute, Id) {
+    this.getById = function (apiRoute, Id) {
         urlGet = apiRoute + '/' + Id;
         return $http.get(urlGet);
     }

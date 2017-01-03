@@ -176,9 +176,25 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\Site.css" />
+    <Content Include="Assets\Images\Animated\loaders\certica_twist.gif" />
+    <Content Include="Assets\Images\Animated\loaders\progress.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_grey.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_grey_large.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_grey_on_grey.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_orange.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_orange_large.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_orange_on_grey.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_orange_on_red_large.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_orange_on_yellow.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_red.gif" />
+    <Content Include="Assets\Images\Animated\loaders\snake_red_large.gif" />
+    <Content Include="Assets\Images\Animated\loaders\squares_orange.gif" />
+    <Content Include="Assets\Images\Animated\loaders\squares_orange_on_grey.gif" />
     <Content Include="Assets\ngScripts\Controllers\membersController.js" />
     <Content Include="Assets\ngScripts\Modules\ngAppMain.js" />
     <Content Include="Assets\ngScripts\Services\membersCrudOps.js" />
+    <Content Include="Assets\Scripts\members.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

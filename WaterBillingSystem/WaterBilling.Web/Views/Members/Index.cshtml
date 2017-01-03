@@ -3,6 +3,7 @@
 }
 
 <div data-ng-app="mainApp">
+    <link href="~/Assets/css/Site.css" rel="stylesheet" />
 
     <div data-ng-controller="MembersController">
         <h2>{{HeadTitle}}</h2>
@@ -24,7 +25,7 @@
                         <input type="text"
                                id="idLastName"
                                class="form-control"
-                               name="nameLastName" ng-model="lasttName" />
+                               name="nameLastName" ng-model="lastName" />
                     </div>
                 </div>
               
@@ -36,10 +37,44 @@
                               ng-click="saveUpdate()">
                             <i class="icon-save"></i> {{btnText}}
                         </span>
+                        <span>
+                            <img class="saveprogress" src="~/Assets/Images/Animated/loaders/snake_orange.gif" />
+                            {{progressMessage}}
+                        </span>
                     </div>
                 </div>
             </div>
         </form>
+        <table class="table table-hover table-condensed general-table">
+            <thead class="grid-top-panel">
+                <tr>
+                    <th style="display:none">Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th><img class="listprogress" src="~/Assets/Images/Animated/loaders/squares_orange.gif" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="mermber in members">
+                    <td style="display:none">{{mermber.Id}}</td>
+                    <td> {{mermber.FirstName}}</td>
+                    <td> {{mermber.LastName}}</td>
+                    <td style="text-align:right; color:white">
+                        <div class="btn-group">
+                            <span id="edit" class="btn btn-primary btn-xs margin-right-btn"
+                                  ng-click="GetMemberById(mermber)">
+                                Edit
+                            </span>
+                            <span id="save" class="btn btn-danger btn-xs margin-right-btn"
+                                  ng-click="DeleteMember(mermber)">
+                                Delete
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
     </div>
 
 
