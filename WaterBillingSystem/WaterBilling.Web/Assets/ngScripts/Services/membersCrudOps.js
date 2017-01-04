@@ -18,7 +18,7 @@
         return request;
     }
 
-    this.delete = function (apiRoute) {
+    this.delete = function (apiRoute, Model) {
         var request = $http({
             method: 'delete', //watch if there difference between '' and ""
             url: apiRoute,

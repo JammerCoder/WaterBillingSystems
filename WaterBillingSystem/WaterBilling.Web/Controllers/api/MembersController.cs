@@ -45,6 +45,7 @@ namespace WaterBilling.Web.Controllers.api
         [ResponseType(typeof(Member))]
         [HttpGet]
         public List<Member> GetMembers()
+
         {
             List<Member> members = null;
             try
@@ -91,6 +92,27 @@ namespace WaterBilling.Web.Controllers.api
                 result = 1;
             }
             catch(Exception e)
+            {
+                result = 0;
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
+
+        [ResponseType(typeof (Member))]
+        [HttpDelete]
+        public HttpResponseMessage DeleteMember(Member amember)
+        {
+            int result = 0;
+            try
+            {
+                var member = _db.Members.Where(x => x.Id == amember.Id).FirstOrDefault();
+                _db.Members.Attach(member);
+                _db.Members.Remove(member);
+                _db.SaveChanges();
+                result = 1;
+            }
+            catch (Exception e)
             {
                 result = 0;
             }

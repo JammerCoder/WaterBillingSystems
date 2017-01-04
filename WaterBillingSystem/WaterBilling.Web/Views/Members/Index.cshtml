@@ -10,6 +10,11 @@
         <form novalidate name="frmMermbers" id="frmMembers" class="form-horizontal row-border">
             <br />
             <div class="col-md-12">
+                
+                        <input class="hidden" type="text"
+                               id="memberId"
+                               name="nameMemberId" ng-model="memberId" />
+                    
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="input17"> First Name</label>
                     <div class="col-md-7">
@@ -55,18 +60,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="mermber in members">
-                    <td style="display:none">{{mermber.Id}}</td>
-                    <td> {{mermber.FirstName}}</td>
-                    <td> {{mermber.LastName}}</td>
+                <tr ng-repeat="member in members">
+                    <td style="display:none">{{member.Id}}</td>
+                    <td> {{member.FirstName}}</td>
+                    <td> {{member.LastName}}</td>
                     <td style="text-align:right; color:white">
                         <div class="btn-group">
                             <span id="edit" class="btn btn-primary btn-xs margin-right-btn"
-                                  ng-click="GetMemberById(mermber)">
+                                  ng-click="GetMemberById(member)">
                                 Edit
                             </span>
                             <span id="save" class="btn btn-danger btn-xs margin-right-btn"
-                                  ng-click="DeleteMember(mermber)">
+                                  ng-click="ConfirmDelete(member)">
                                 Delete
                             </span>
                         </div>
