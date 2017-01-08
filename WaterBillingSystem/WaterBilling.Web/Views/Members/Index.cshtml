@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div data-ng-app="mainApp">
+    <link href="~/Assets/css/Site.css" rel="stylesheet" />
+
+    <div data-ng-controller="MembersController">
+        <h2>{{HeadTitle}}</h2>
+        
+        <form novalidate name="frmMermbers" id="frmMembers" class="form-horizontal row-border">
+            <br />
+            <div class="col-md-12">
+
+                <input class="hidden" type="text"
+                       id="idMemberId"
+                       name="nameMemberId" ng-model="memberId" />
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17"> First Name</label>
+                    <div class="col-md-7">
+                        <input type="text"
+                               id="idFirstName"
+                               class="form-control"
+                               name="nameFirstName" ng-model="firstName" ng-disabled="inputStatus"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="input17"> Last Name</label>
+                    <div class="col-md-7">
+                        <input type="text"
+                               id="idLastName"
+                               class="form-control"
+                               name="nameLastName" ng-model="lastName" ng-disabled="inputStatus"/>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-7">
+                        <span id="save" class="btn btn-{{btnAttrib}} margin-right-btn"
+                              ng-click="NewRecord()">
+                            <i class="icon-save"></i> {{btnNewRec}}
+                        </span>
+                        <span id="save" class="btn btn-{{btnAttrib}} margin-right-btn"
+                              ng-click="UpdateRecord()">
+                            <i class="icon-save"></i> {{btnUpdateRec}}
+                        </span>
+                        <span id="save" class="btn btn-{{btnAttrib}} margin-right-btn"
+                              ng-click="saveUpdate()">
+                            <i class="icon-save"></i> Delete
+                        </span>
+                        <span>
+                            <img class="saveprogress" src="~/Assets/Images/Animated/loaders/snake_orange.gif" />
+                            {{progressMessage}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <table class="table table-hover table-condensed general-table">
+            <thead class="grid-top-panel">
+                <tr>
+                    <th style="display:none">Id</th>
+                    <th>First Name</th>
+                    <th>Last Name <img class="listprogress" src="~/Assets/Images/Animated/loaders/squares_orange.gif" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="member in members">
+                    <td style="display:none">{{member.Id}}</td>
+                    <td ng-click="SelectMember(member)"> {{member.FirstName}}</td>
+                    <td ng-click="SelectMember(member)"> {{member.LastName}}</td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+
+
+</div>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Assets/ngScripts/Modules/ngAppMain.js"></script>
+<script src="~/Assets/ngScripts/Controllers/membersController.js"></script>
+<script src="~/Assets/ngScripts/Services/membersCrudOps.js"></script>
