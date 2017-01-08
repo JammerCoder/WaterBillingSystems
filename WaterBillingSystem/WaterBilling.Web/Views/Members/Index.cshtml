@@ -7,21 +7,22 @@
 
     <div data-ng-controller="MembersController">
         <h2>{{HeadTitle}}</h2>
+        
         <form novalidate name="frmMermbers" id="frmMembers" class="form-horizontal row-border">
             <br />
             <div class="col-md-12">
-                
-                        <input class="hidden" type="text"
-                               id="memberId"
-                               name="nameMemberId" ng-model="memberId" />
-                    
+
+                <input class="hidden" type="text"
+                       id="idMemberId"
+                       name="nameMemberId" ng-model="memberId" />
+
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="input17"> First Name</label>
                     <div class="col-md-7">
                         <input type="text"
                                id="idFirstName"
                                class="form-control"
-                               name="nameFirstName" ng-model="firstName" />
+                               name="nameFirstName" ng-model="firstName" ng-disabled="inputStatus"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -30,17 +31,25 @@
                         <input type="text"
                                id="idLastName"
                                class="form-control"
-                               name="nameLastName" ng-model="lastName" />
+                               name="nameLastName" ng-model="lastName" ng-disabled="inputStatus"/>
                     </div>
                 </div>
-              
+                
                 <div class="form-group">
                     <div class="col-md-4">
                     </div>
                     <div class="col-md-7">
-                        <span id="save" class="btn btn-success margin-right-btn"
+                        <span id="save" class="btn btn-{{btnAttrib}} margin-right-btn"
+                              ng-click="NewRecord()">
+                            <i class="icon-save"></i> {{btnNewRec}}
+                        </span>
+                        <span id="save" class="btn btn-{{btnAttrib}} margin-right-btn"
+                              ng-click="UpdateRecord()">
+                            <i class="icon-save"></i> {{btnUpdateRec}}
+                        </span>
+                        <span id="save" class="btn btn-{{btnAttrib}} margin-right-btn"
                               ng-click="saveUpdate()">
-                            <i class="icon-save"></i> {{btnText}}
+                            <i class="icon-save"></i> Delete
                         </span>
                         <span>
                             <img class="saveprogress" src="~/Assets/Images/Animated/loaders/snake_orange.gif" />
@@ -55,27 +64,14 @@
                 <tr>
                     <th style="display:none">Id</th>
                     <th>First Name</th>
-                    <th>Last Name</th>
-                    <th><img class="listprogress" src="~/Assets/Images/Animated/loaders/squares_orange.gif" /></th>
+                    <th>Last Name <img class="listprogress" src="~/Assets/Images/Animated/loaders/squares_orange.gif" /></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="member in members">
                     <td style="display:none">{{member.Id}}</td>
-                    <td> {{member.FirstName}}</td>
-                    <td> {{member.LastName}}</td>
-                    <td style="text-align:right; color:white">
-                        <div class="btn-group">
-                            <span id="edit" class="btn btn-primary btn-xs margin-right-btn"
-                                  ng-click="GetMemberById(member)">
-                                Edit
-                            </span>
-                            <span id="save" class="btn btn-danger btn-xs margin-right-btn"
-                                  ng-click="ConfirmDelete(member)">
-                                Delete
-                            </span>
-                        </div>
-                    </td>
+                    <td ng-click="SelectMember(member)"> {{member.FirstName}}</td>
+                    <td ng-click="SelectMember(member)"> {{member.LastName}}</td>
                 </tr>
             </tbody>
             <tfoot></tfoot>

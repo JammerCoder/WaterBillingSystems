@@ -1,15 +1,17 @@
-﻿appMain.controller('MembersController', ['$scope','CrudOps',
-        function ($scope,CrudOps) {
+﻿appMain.controller('MembersController', ['$scope', 'CrudOps',
+        function ($scope, CrudOps) {
             $scope.HeadTitle = 'Members Registry';
+            
 
             //Base URL
             var baseUrl = 'api/Members';
-            
-            $scope.btnText = 'Save';
+
+            $scope.btnNewRec = 'Add';
+            $scope.btnUpdateRec = 'Edit';
 
             $scope.memberId = 0;
             //Save 
-            $scope.saveUpdate = function () {
+            $scope.saveUpdate = function (model) {
                 $scope.progressMessage = "";
                 $('img.saveprogress').show();
 
@@ -19,7 +21,7 @@
                     Id: $scope.memberId
                 }
 
-                switch($scope.btnText){
+                switch ($scope.btnText) {
                     case 'Save':
                         var apiRoute = baseUrl + '/SaveMember/';
                         var saveMember = CrudOps.post(apiRoute, member);
@@ -40,7 +42,6 @@
                         break;
 
                     case 'Update':
-                        debugger
                         $('img.saveprogress').show();
                         var apiRoute = baseUrl + '/UpdateMember/';
                         var updateMember = CrudOps.put(apiRoute, member);
@@ -62,8 +63,8 @@
                     case 'Delete':
                         debugger
                         $('img.saveprogress').show();
-                        var apiRoute = baseUrl + '/DeleteMember/';
-                        var deltMember = CrudOps.delete(apiRoute, member);
+                        var apiRoute = baseUrl + '/RemoveMember/' + member.Id;
+                        var deltMember = CrudOps.delete(apiRoute);
                         deltMember.then(function (response) {
                             $('img.saveprogress').hide();
 
@@ -83,81 +84,77 @@
                 }
             }
 
+            $scope.NewRecord = function () {
+                $scope.btnNewRec = "Save";
+            }
+
             $scope.Clear = function () {
                 $scope.memberId = 0;
                 $scope.firstName = "";
                 $scope.lastName = "";
-                $scope.btnText = "Save";
+                $scope.btnText = "Add";
                 $scope.progressMessage = "";
                 $('img.saveprogress').hide();
             }
 
             $scope.GetMembers = function () {
-                debugger
+                $scope.btnAttrib = 'success';
+                $scope.btnText = 'Add';
+                $scope.inputStatus = true;
+
                 $('img.listprogress').show();
 
                 var apiRoute = baseUrl + '/GetMembers/';
                 var members = CrudOps.getAll(apiRoute);
-
                 members.then(function (response) {
                     $('img.listprogress').hide();
-
                     $scope.members = response.data;
                 }, function (error) {
                     console.log("Error:" + error);
                 });
             }
 
-            $scope.GetMembers();
+            $scope.GetMembers(); // initiate Members list
 
-            $scope.GetMemberById = function (model) {
-                debugger
-                var apiRoute = baseUrl + '/GetMemberById/';
-                var member = CrudOps.getById(apiRoute, model.Id);
+            $scope.GetMember = function (model, url, caller) {
+                var member;
+                switch (caller) {
+                    case 'Update':
+                        $scope.inputStatus = false;
+                        break;
 
+                    case 'Delete':
+                        $scope.inputStatus = true;
+                        break;
+                }
+
+                member = CrudOps.getById(url, model.Id);
                 member.then(function (response) {
                     $scope.memberId = response.data.Id;
                     $scope.firstName = response.data.FirstName;
                     $scope.lastName = response.data.LastName;
 
-                    $scope.btnText = "Update";
+                    $scope.btnText = caller;
                 }, function (error) {
                     console.log('Error: ' + error);
                 });
             }
 
-            $scope.ConfirmDelete = function (model) {
+            $scope.SelectMember = function (model) {
                 debugger
+                $scope.Clear();
+                $scope.btnAttrib = 'info';
                 var apiRoute = baseUrl + '/GetMemberById/';
-                var member = CrudOps.getById(apiRoute, model.Id);
-
-                member.then(function (response) {
-                    $scope.memberId = response.data.Id;
-                    $scope.firstName = response.data.FirstName;
-                    $scope.lastName = response.data.LastName;
-
-                    $scope.btnText = "Delete";
-                }, function (error) {
-                    console.log('Error: ' + error);
-                });
+                $scope.GetMember(model, apiRoute, "Update");
             }
 
-            /*
-            $scope.DeleteMember = function (model) {
+            $scope.SelectDelete = function (model) {
                 debugger
-                var apiRoute = baseUrl + '/DeleteMember/' + model.Id;
-                var deleteMember = CrudOps.delete(apiRoute);
-                deleteMember.then(function (response) {
-                    if (response.data != '') {
-                        console.log('Deleted!');
-                        $scope.GetMembers();
-                        $scope.Clear();
-                    } else {
-                        console.log('Delete failed!');
-                    }
-                }, function (error) {
-                    console.log("Error: " + error);
-                });
-            }*/
+                $scope.Clear();
+                $scope.btnAttrib = 'danger';
+                var apiRoute = baseUrl + '/GetMemberById/';
+                $scope.GetMember(model, apiRoute, "Delete");
+            }
+
         }
 ]);

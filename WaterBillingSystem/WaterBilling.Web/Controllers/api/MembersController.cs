@@ -101,12 +101,12 @@ namespace WaterBilling.Web.Controllers.api
 
         [ResponseType(typeof (Member))]
         [HttpDelete]
-        public HttpResponseMessage DeleteMember(Member amember)
+        public HttpResponseMessage RemoveMember(int id)
         {
             int result = 0;
             try
             {
-                var member = _db.Members.Where(x => x.Id == amember.Id).FirstOrDefault();
+                var member = _db.Members.Where(x => x.Id == id).FirstOrDefault();
                 _db.Members.Attach(member);
                 _db.Members.Remove(member);
                 _db.SaveChanges();
